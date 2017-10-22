@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+	"http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	
+	<!-- 设置系统参数 -->
+	<constant name="struts.devMode" value="true"/>
+	<constant name="struts.ui.theme" value="simple"/>
+
+	<!-- 设置Action -->
+	<package name="mytest" extends="json-default">
+		<global-allowed-methods>regex:.*</global-allowed-methods>
+		<action name="empAction_*" method="{1}" class="empAction" >
+			<result name="showDept" type="json">
+				<param name="includeProperties">deptList.*</param>
+			</result>
+			<result name="addEmp" type="redirect">/addEmp.jsp?msg=${msg}</result>
+			<result name="empList">/showEmp.jsp</result>
+			<result name="toUpdate">/updateEmp.jsp</result>
+			<result name="doUpdate" type="redirectAction">empAction_findempList?msg=${msg}</result>
+			<result name="deleteEmp" type="redirectAction">empAction_findempList?msg=${msg}</result>
+		</action>
+		<action name="deptAction_*" method="{1}" class="deptAction">
+			<result name="addDept" type="redirect">/addDept.jsp?msg=${msg}</result>
+			<result name="showDept">/showDept.jsp</result>
+			<result name="delectDept" type="redirectAction">deptAction_findDeptList?msg=${msg}</result>
+		</action>
+	</package>
+</struts>
+
+
+
+
+
